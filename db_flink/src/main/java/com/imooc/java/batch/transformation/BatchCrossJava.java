@@ -10,14 +10,12 @@ import java.util.Arrays;
  * Created by xuwei
  */
 public class BatchCrossJava {
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
         ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();
-
         //初始化第一份数据
         DataSource<Integer> text1 = env.fromCollection(Arrays.asList(1, 2));
         //初始化第二份数据
         DataSource<String> text2 = env.fromCollection(Arrays.asList("a", "b"));
-
         //执行cross操作
         text1.cross(text2).print();
     }

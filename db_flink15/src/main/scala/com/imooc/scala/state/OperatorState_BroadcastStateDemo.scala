@@ -1,6 +1,6 @@
 package com.imooc.scala.state
 
-import com.alibaba.fastjson.JSON
+import com.alibaba.fastjson2.JSON
 import org.apache.flink.api.common.RuntimeExecutionMode
 import org.apache.flink.api.common.state.MapStateDescriptor
 import org.apache.flink.streaming.api.functions.co.BroadcastProcessFunction
@@ -28,7 +28,7 @@ object OperatorState_BroadcastStateDemo {
     val confStream = env.addSource(new MyRedisSource)
 
     //将配置数据流广播出去，变成广播数据流，并且注册一个MapState
-    val countryAreaMapStateDescriptor = new MapStateDescriptor[String,String](
+    val countryAreaMapStateDescriptor = new MapStateDescriptor[String, String](
       "countryArea",
       classOf[String],
       classOf[String]
@@ -39,7 +39,7 @@ object OperatorState_BroadcastStateDemo {
     val broadcastConnectStream = eventStream.connect(broadcastStream)
 
     //处理连接后的流
-    broadcastConnectStream.process(new BroadcastProcessFunction[String,mutable.Map[String,String],String] {
+    broadcastConnectStream.process(new BroadcastProcessFunction[String, mutable.Map[String, String], String] {
       //处理事件数据流中的数据
       override def processElement(value: String,
                                   ctx: BroadcastProcessFunction[String, mutable.Map[String, String], String]#ReadOnlyContext,
@@ -49,11 +49,12 @@ object OperatorState_BroadcastStateDemo {
         //取出广播状态中的数据
         val broadcastState = ctx.getBroadcastState(countryAreaMapStateDescriptor)
         val area = broadcastState.get(countryCode)
-        if(area!=null){
-          jsonObj.put("countryCode",area)
-          out.collect(jsonObj.toJSONString)
+        if (area != null) {
+          jsonObj.put("countryCode", area)
+          out.collect(jsonObj.toString)
         }
       }
+
       //处理广播后的配置数据流中的数据
       override def processBroadcastElement(value: mutable.Map[String, String],
                                            ctx: BroadcastProcessFunction[String, mutable.Map[String, String], String]#Context,

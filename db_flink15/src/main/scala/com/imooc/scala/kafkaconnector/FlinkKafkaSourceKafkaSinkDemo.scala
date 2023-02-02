@@ -20,7 +20,7 @@ object FlinkKafkaSourceKafkaSinkDemo {
     env.setRuntimeMode(RuntimeExecutionMode.AUTOMATIC)
 
     //开启Checkpoint
-    env.enableCheckpointing(5000*2)
+    env.enableCheckpointing(5000 * 2)
 
     //创建KafkaSource数据源
     val kafkaSource = KafkaSource
@@ -30,8 +30,8 @@ object FlinkKafkaSourceKafkaSinkDemo {
       .setGroupId("gid_dt001")
       .setStartingOffsets(OffsetsInitializer.committedOffsets(OffsetResetStrategy.LATEST))
       .setValueOnlyDeserializer(new SimpleStringSchema())
-      .setProperty("partition.discovery.interval.ms","10000")//10秒触发一次
-      .setProperty("commit.offsets.on.checkpoint","true")
+      .setProperty("partition.discovery.interval.ms", "10000") //10秒触发一次
+      .setProperty("commit.offsets.on.checkpoint", "true")
       .build
 
     import org.apache.flink.api.scala._
@@ -49,7 +49,7 @@ object FlinkKafkaSourceKafkaSinkDemo {
       .setDeliverGuarantee(DeliveryGuarantee.EXACTLY_ONCE)
       .build
 
-    text.map(line=>{
+    text.map(line => {
       line
     }).sinkTo(kafkaSink)
 

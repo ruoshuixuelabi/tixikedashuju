@@ -13,11 +13,10 @@ import java.util.Iterator;
  * Created by xuwei
  */
 public class BatchMapPartitionJava {
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
         ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();
         //生成数据源数据
         DataSource<String> text = env.fromCollection(Arrays.asList("hello you", "hello me"));
-
         //每次处理一个分区的数据
         text.mapPartition(new MapPartitionFunction<String, String>() {
             @Override
@@ -25,7 +24,7 @@ public class BatchMapPartitionJava {
                     throws Exception {
                 Iterator<String> it = iterable.iterator();
                 //可以在此处创建数据库连接，建议把这块代码放到try-catch代码块中
-                while(it.hasNext()){
+                while (it.hasNext()) {
                     String line = it.next();
                     String[] words = line.split(" ");
                     for (String word : words) {
