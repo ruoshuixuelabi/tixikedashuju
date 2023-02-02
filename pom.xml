@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.xuexi</groupId>
+    <artifactId>tixikedashuju</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>tixikedashuju</name>
+    <description>tixikedashuju</description>
+    <packaging>pom</packaging>
+    <modules>
+        <module>db_flink</module>
+        <module>db_flink15</module>
+    </modules>
+    <!--统一管理-->
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <spring-boot.version>2.7.8</spring-boot.version>
+        <mybatis-plus-boot.version>3.5.3.1</mybatis-plus-boot.version>
+        <fastjson2.version>2.0.23</fastjson2.version>
+        <hutool.version>5.8.11</hutool.version>
+        <flink.version>1.16.0</flink.version>
+    </properties>
+    <!-- 子模块继承之后，提供作用:锁定版本 -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus-boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.fastjson2</groupId>
+                <artifactId>fastjson2</artifactId>
+                <version>${fastjson2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>
