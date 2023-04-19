@@ -12,6 +12,7 @@
         <module>db_flink</module>
         <module>db_flink15</module>
         <module>db_elasticsearch</module>
+        <module>db_scala</module>
     </modules>
     <!--统一管理-->
     <properties>
